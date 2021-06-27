@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ReactDotNet.Models
 {
-    public class Employees
+    public class Employee
     {
         public Guid Id { get; set; }
         public String FirstName{ get; set; }
