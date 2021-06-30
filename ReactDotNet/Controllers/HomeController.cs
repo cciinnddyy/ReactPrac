@@ -11,7 +11,10 @@ namespace ReactDotNet.Controllers
         
         public ActionResult Index()
         {
-            return View();
+            Employees employees = new Employees();
+            employees.FirstName = "cindy";
+            employees.Id = 100;
+            return View(employees);
         }
 
         public ActionResult About()

@@ -1,6 +1,12 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<style>
+    .title {
+        background-color:aqua;
+        width:30px;
+    }
+</style>
 
 <div id="Demo">
 
@@ -8,7 +14,19 @@
 
 @section scripts{
     <script type="text/babel">
-        const VDOM = <h1>Hello,React</h1>;
+        const myID = "reactid";
+        const myData = "@Model.FirstName";
+        /*Create virtual DOM object*/
+        const VDOM = 
+            <div>
+                <h1 className="title" id ={myID.toLowerCase()}>
+                    <span style={{color:"black"}}>
+                        {myData.toUpperCase()}
+                    </span>
+                </h1>
+                <input type="text"/>
+            </div>
+        /*Render DOM object to page*/
         ReactDOM.render(VDOM, document.getElementById("Demo"));
     </script>
 }
