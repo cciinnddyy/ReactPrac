@@ -8,7 +8,19 @@
 
 @section scripts{
     <script type="text/babel">
-        const VDOM = <h1>Hello,React</h1>;
-        ReactDOM.render(VDOM, document.getElementById("Demo"));
+        /* Create function component 
+            
+        */
+        function Temo(){
+            /*Bable use strict, this is not window object, it is undefined*/
+            console.log(this) 
+            return <h1>I am a simple function component</h1>
+        }
+        /* Render component*/
+        ReactDOM.render(<Temo/>, document.getElementById("Demo"));
+        /*
+            1.React find Temo component
+            2.Realize that Temo is a function, call that function => transform virtual DOM to real DOM => render on the page
+        */
     </script>
 }
