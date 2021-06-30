@@ -8,7 +8,30 @@
 
 @section scripts{
     <script type="text/babel">
-        const VDOM = <h1>Hello,React</h1>;
+        /*js expression vs statement
+            {Expression} 
+            Expression
+                1. a
+                2. a+b
+                3. functionA(1) return undefined
+                4. arr.map()
+            Statement (No return value)
+                1. if()
+                2. for()
+                3. switch
+        */
+        const data = ["Angular","React","Vue"]
+        const VDOM = 
+            <div>
+                <h1>Hello,React</h1>
+                <ul>
+                    {
+                        data.map((item,index)=>{
+                            return <li key={index}>{item}</li>
+                        })        
+                    }
+                </ul>
+            </div>
         ReactDOM.render(VDOM, document.getElementById("Demo"));
     </script>
 }
