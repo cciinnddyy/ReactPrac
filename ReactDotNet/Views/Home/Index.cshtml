@@ -8,7 +8,19 @@
 
 @section scripts{
     <script type="text/babel">
-        const VDOM = <h1>Hello,React</h1>;
-        ReactDOM.render(VDOM, document.getElementById("Demo"));
+        class MyComponent extends React.Component{
+            
+            render (){
+                console.log(this)
+                return <h1>Hello,React</h1>
+            }
+        }
+        ReactDOM.render(<MyComponent/>,document.getElementById('Demo'))
+        /*
+            1.React find <MyComponent/>
+            2.It is class so react new MyComponent(); call render()
+            3.Get the virtual DOM and convert it to real DOM
+
+        */
     </script>
 }
