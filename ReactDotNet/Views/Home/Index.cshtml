@@ -9,18 +9,21 @@
 @section scripts{
     <script type="text/babel">
         class MyComponent extends React.Component{
-            
-            render (){
-                console.log(this)
-                return <h1>Hello,React</h1>
-            }
-        }
-        ReactDOM.render(<MyComponent/>,document.getElementById('Demo'))
-        /*
-            1.React find <MyComponent/>
-            2.It is class so react new MyComponent(); call render()
-            3.Get the virtual DOM and convert it to real DOM
+          
+            state = {weather:"Hot",isHot:true}
 
-        */
+            changeWord = ()=>{
+                const ishot = this.state.isHot
+                console.log(this.props.hello)
+                this.setState({isHot:!ishot})
+            }
+
+             render (){
+                 return <h1 onClick={this.changeWord}>Today is {this.state.isHot?'Hot':'Cold'}</h1>
+             }
+
+         }
+         ReactDOM.render(<MyComponent hello="123"/>,document.getElementById('Demo'))
+
     </script>
 }
