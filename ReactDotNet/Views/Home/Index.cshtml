@@ -5,47 +5,32 @@
 <div id="Demo">
 
 </div>
+<div id="Demo1"> 
 
+</div>
 @section scripts{
     <script type="text/babel">
-        class Person {
-            constructor(name){
-                this.name = name
-            }
-            printNameArrow(){
-                setTimeout(()=>{
-                    console.log("Arrow " + this.name)        
-                },100)
-            }
-            printNameFunc(){
-                setTimeout(function(){
-                    console.log("F " + this.url)
-                    console.log("Function " + this.name)
-                },100)
-            }
-            
-        }
-        class MyComponent extends React.Component{
-            
-            state = {weather:"Hot",isHot:true}
-
-            changeWord = ()=>{
-                const ishot = this.state.isHot
-                console.log(this.props.hello)
-                /*this.setState({isHot:!ishot})*/
-            }
-            
-             render (){
-                 this.changeWord()
-                 return <h1 onClick={this.changeWord}>Today is {this.state.isHot?'Hot':'Cold'}</h1>
-             }
-
+        let persons = {
+             "name":"cindy",
+             "gender":"female",
+             "age":44
          }
-         ReactDOM.render(<MyComponent hello="123"/>,document.getElementById('Demo'))
-         let person = new Person("cindy")
-         person.printNameArrow()
-         /*this in the function has the same scope as person instance*/
-         person.printNameFunc()
-         
+
+        class Person extends React.Component{
+
+             render(){
+                 const {name,age,gender} = this.props
+                 return (
+                         <ul>
+                             <li>{name}</li>
+                             <li>{age}</li>
+                             <li>{gender}</li>
+                         </ul>
+                  )
+             }
+         }
+
+         ReactDOM.render(<Person name="cindy" age="1" gender="female"/>,document.getElementById("Demo"))
+         ReactDOM.render(<Person {...persons} />,document.getElementById("Demo1"))
     </script>
-}
+    }
