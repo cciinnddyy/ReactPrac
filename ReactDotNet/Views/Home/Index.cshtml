@@ -10,27 +10,51 @@
 </div>
 @section scripts{
     <script type="text/babel">
+        /*Props is read only*/
         let persons = {
              "name":"cindy",
              "gender":"female",
              "age":44
          }
 
-        class Person extends React.Component{
 
+
+        class Person extends React.Component{
+             static propTypes = {
+                 name:PropTypes.string.isRequired,
+                 speak:PropTypes.func
+             }
+
+             static defaultProps = {
+                gender:"Third"
+             }
+
+             /*Not static, set defualt state to the instance*/
+             state = {
+                
+             }
              render(){
                  const {name,age,gender} = this.props
                  return (
                          <ul>
                              <li>{name}</li>
-                             <li>{age}</li>
+                             <li>{age+1}</li>
                              <li>{gender}</li>
                          </ul>
                   )
              }
          }
 
-         ReactDOM.render(<Person name="cindy" age="1" gender="female"/>,document.getElementById("Demo"))
+        /*Person.propTypes = {
+            name:PropTypes.string.isRequired,
+            speak:PropTypes.func
+        }
+        Person.defaultProps={
+            gender:"Third"
+        }*/
+
+         ReactDOM.render(<Person name="Cindy" age={1}/>,document.getElementById("Demo"))
+         persons = {...persons,name:"Gary",gender:"male"}
          ReactDOM.render(<Person {...persons} />,document.getElementById("Demo1"))
     </script>
     }
