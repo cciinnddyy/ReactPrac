@@ -1,6 +1,13 @@
 ﻿@{
     ViewBag.Title = "Testing Page";
 }
+<style>
+    .inlineInput {
+        display: inline;
+        white-space: nowrap;
+        margin-left:10px;
+    }
+</style>
 
 <div id="Demo">
 
@@ -8,44 +15,41 @@
 
 @section scripts{
     <script type="text/babel">
-        class Person {
-            constructor(name){
-                this.name = name
-            }
-            printNameArrow(){
-                setTimeout(()=>{
-                    console.log("Arrow " + this.name)        
-                },100)
-            }
-            printNameFunc(){
-                setTimeout(function(){
-                    console.log("F " + this.url)
-                    console.log("Function " + this.name)
-                },100)
+        class Demo extends React.Component{
+            state = {isHot:false}
+            showData = ()=>{
+                const {input1,input2} = this
+                alert(input1.value)
+                alert(input2.value)
             }
             
+            changeWeather = ()=>{
+                console.log("click")
+                const {isHot} = this.state
+                this.setState({isHot:!isHot})
+            }
+            saveInput = (inputTag)=>{                               
+                if(inputTag.id == "1"){
+                    this.input1 = inputTag
+                }else{
+                    this.input2 = inputTag
+                }
+                console.log("LALA @@ " + inputTag)
+            }
+            render(){
+                const {isHot} = this.state
+                return(
+                    <div>
+                        <h1>Today is {isHot?"Hot":"Cold"}</h1>
+                        <input type="button" onClick={this.changeWeather} value="Change Weather" />
+                        {/*<input ref={(currentNode)=>{this.input1 = currentNode;console.log(" LALA " + currentNode)}} className="inlineInput" type="text" placeholder = "Click button to show text"/>*/}
+                        <input id="1" ref={this.saveInput} className="inlineInput" type="text" placeholder = "Click button to show text"/>
+                        <input className="inlineInput" type="button" value="Button" onClick={this.showData}/>
+                        <input ref={this.saveInput} className="inlineInput" type="text" onBlur={this.showData} placeholder="onblur to show text" />
+                    </div>
+                )
+            }
         }
-        class MyComponent extends React.Component{
-            
-            state = {weather:"Hot",isHot:true}
-
-            changeWord = ()=>{
-                const ishot = this.state.isHot
-                console.log(this.props.hello)
-                /*this.setState({isHot:!ishot})*/
-            }
-            
-             render (){
-                 this.changeWord()
-                 return <h1 onClick={this.changeWord}>Today is {this.state.isHot?'Hot':'Cold'}</h1>
-             }
-
-         }
-         ReactDOM.render(<MyComponent hello="123"/>,document.getElementById('Demo'))
-         let person = new Person("cindy")
-         person.printNameArrow()
-         /*this in the function has the same scope as person instance*/
-         person.printNameFunc()
-         
+        ReactDOM.render(<Demo/>,document.getElementById("Demo"));
     </script>
 }
