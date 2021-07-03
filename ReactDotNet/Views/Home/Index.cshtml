@@ -8,22 +8,44 @@
 
 @section scripts{
     <script type="text/babel">
+        class Person {
+            constructor(name){
+                this.name = name
+            }
+            printNameArrow(){
+                setTimeout(()=>{
+                    console.log("Arrow " + this.name)        
+                },100)
+            }
+            printNameFunc(){
+                setTimeout(function(){
+                    console.log("F " + this.url)
+                    console.log("Function " + this.name)
+                },100)
+            }
+            
+        }
         class MyComponent extends React.Component{
-          
+            
             state = {weather:"Hot",isHot:true}
 
             changeWord = ()=>{
                 const ishot = this.state.isHot
                 console.log(this.props.hello)
-                this.setState({isHot:!ishot})
+                /*this.setState({isHot:!ishot})*/
             }
-
+            
              render (){
+                 this.changeWord()
                  return <h1 onClick={this.changeWord}>Today is {this.state.isHot?'Hot':'Cold'}</h1>
              }
 
          }
          ReactDOM.render(<MyComponent hello="123"/>,document.getElementById('Demo'))
-
+         let person = new Person("cindy")
+         person.printNameArrow()
+         /*this in the function has the same scope as person instance*/
+         person.printNameFunc()
+         
     </script>
 }
