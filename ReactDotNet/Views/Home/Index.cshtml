@@ -15,8 +15,8 @@
             showData = ()=>{
                 alert(this.myRef1.current.value)
             }
-            showData2 = ()=>{
-                 alert(this.myRef2.current.value)
+            showData2 = (event)=>{
+                 alert(event.target.value)
             }
             changeWeather = ()=>{
                 console.log("click")
@@ -30,7 +30,7 @@
                     <div>
                         <input ref={this.myRef1} className="inlineInput" type="text" placeholder = "Click button to show text"/>
                         <input className="inlineInput" type="button" value="Button" onClick={this.showData}/>
-                        <input ref={this.myRef2} className="inlineInput" type="text" onBlur={this.showData2} placeholder="onblur to show text" />
+                        <input className="inlineInput" type="text" onBlur={this.showData2} placeholder="onblur to show text" />
                     </div>
                 )
             }
