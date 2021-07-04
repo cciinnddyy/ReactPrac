@@ -1,28 +1,52 @@
 ﻿@{
     ViewBag.Title = "Testing Page";
 }
-
+<style>
+    .inlineInput>label input button{
+        display: inline;
+        white-space: nowrap;
+        margin-left: 10px;
+    }
+</style>
 <div id="Demo">
 
 </div>
 
 @section scripts{
     <script type="text/babel">
+        var currentURL = window.location.hostname
+        var contactURL = "http://"+currentURL + ":49298/Home/Contact"
           class Demo extends React.Component{
+            //initiate state
+            state = {username:"",password:""}
+            handleSubmit = (event)=>{
+                event.preventDefault()
+                //現用現取 取節點
+                const {username,password} = this.state
+                //取節點值
 
+                alert (`Account Name ${username} Password ${password}`)
+            }
+            handleTextChange = (event)=>{
+                this.setState({username:event.target.value})
+            }
+            handlePassChange = (event)=>{
+                this.setState({password:event.target.value})
+            }
             render(){
-                
+                //非受控component
+                const {currentHost} = this.props
                 return(
-                    <div>
-                        <label text="Account"></label>
-                        <input className="inlineInput" type="text" placeholder = "Account"/>
-                        <label text="Password"></label>
-                        <input className="inlineInput" type="text" onBlur={this.showData2} placeholder="Password" />
-                        <input className="inlineInput" type="button" value="Button"/>
-                    </div>
+                    <form className="inlineInput" onSubmit={this.handleSubmit}>
+                        <label>Account</label>
+                        <input onChange={this.handleTextChange} type="text" placeholder = "Account" name="username"/>
+                        <label>Password</label>
+                        <input onChange={this.handlePassChange} type="text" placeholder="Password" name="password"/>
+                        <input type="submit" value="Button"/>
+                    </form>
                 )
             }
         }
-        ReactDOM.render(<Demo/>,document.getElementById("Demo"));
+        ReactDOM.render(<Demo currentHost={currentURL}/>,document.getElementById("Demo"))
     </script>
 }
