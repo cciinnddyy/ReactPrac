@@ -27,11 +27,12 @@
 
                 alert (`Account Name ${username} Password ${password}`)
             }
-            handleTextChange = (event)=>{
-                this.setState({username:event.target.value})
-            }
-            handlePassChange = (event)=>{
-                this.setState({password:event.target.value})
+            saveFormData = (inputName)=>{
+               
+               return(event)=>{
+                    this.setState({[inputName]:event.target.value})
+
+               }
             }
             render(){
                 //非受控component
@@ -39,9 +40,9 @@
                 return(
                     <form className="inlineInput" onSubmit={this.handleSubmit}>
                         <label>Account</label>
-                        <input onChange={this.handleTextChange} type="text" placeholder = "Account" name="username"/>
+                        <input onChange={this.saveFormData('username')} type="text" placeholder = "Account" name="username"/>
                         <label>Password</label>
-                        <input onChange={this.handlePassChange} type="text" placeholder="Password" name="password"/>
+                        <input onChange={this.saveFormData('password')} type="text" placeholder="Password" name="password"/>
                         <input type="submit" value="Button"/>
                     </form>
                 )
