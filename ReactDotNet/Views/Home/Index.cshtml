@@ -8,44 +8,57 @@
 
 @section scripts{
     <script type="text/babel">
-        class Person {
-            constructor(name){
-                this.name = name
+        //Life Cycle of React Component
+         //mount
+         //unmount
+         class LifeCycle extends React.Component{
+            constructor(props){
+                super(props)
+                console.log("constructor")
             }
-            printNameArrow(){
-                setTimeout(()=>{
-                    console.log("Arrow " + this.name)        
-                },100)
+            //unmount
+            state = {
+                opacity:0.5
             }
-            printNameFunc(){
-                setTimeout(function(){
-                    console.log("F " + this.url)
-                    console.log("Function " + this.name)
-                },100)
-            }
-            
-        }
-        class MyComponent extends React.Component{
-            
-            state = {weather:"Hot",isHot:true}
 
-            changeWord = ()=>{
-                const ishot = this.state.isHot
-                console.log(this.props.hello)
-                /*this.setState({isHot:!ishot})*/
+            death = ()=>{
+                 console.log("death")
+                 ReactDOM.unmountComponentAtNode(document.getElementById("Demo"))
+                 console.log("death")
             }
-            
-             render (){
-                 this.changeWord()
-                 return <h1 onClick={this.changeWord}>Today is {this.state.isHot?'Hot':'Cold'}</h1>
-             }
 
-         }
-         ReactDOM.render(<MyComponent hello="123"/>,document.getElementById('Demo'))
-         let person = new Person("cindy")
-         person.printNameArrow()
-         /*this in the function has the same scope as person instance*/
-         person.printNameFunc()
-         
+            //只調一次 built-in 通過 LifeCycle instance call
+            //組件完成掛載完畢調用
+            componentDidMount(){
+                console.log("componentDidMount")
+                     this.timer = setInterval(()=>{
+                            let {opacity} = this.state
+                            opacity -= 0.1
+                            if(opacity<=0){
+                                opacity = 1
+                            }
+                            this.setState({opacity})
+                        },200)
+            }
+            componentWillUnmount(){
+                console.log("WillUnmount")
+                //清除定時器
+                clearInterval(this.timer)
+            }
+            //setState 的時候也會call render
+            render (){
+                  console.log("render")
+                  return (
+                         <div>
+                             <h2 style={{opacity:this.state.opacity}}>React 學不會 怎麼辦</h2>
+                             <button onClick={this.death}>Hell is waiting</button>
+                         </div>
+                  )
+              }
+
+          }
+          ReactDOM.render(<LifeCycle/>,document.getElementById('Demo'))
+
+
     </script>
 }
