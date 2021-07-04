@@ -9,28 +9,16 @@
 @section scripts{
     <script type="text/babel">
           class Demo extends React.Component{
-            myRef1 = React.createRef()
-            myRef2 = React.createRef()
-            state = {isHot:false}
-            showData = ()=>{
-                alert(this.myRef1.current.value)
-            }
-            showData2 = (event)=>{
-                 alert(event.target.value)
-            }
-            changeWeather = ()=>{
-                console.log("click")
-                const {isHot} = this.state
-                this.setState({isHot:!isHot})
-            }
 
             render(){
-                const {isHot} = this.state
+                
                 return(
                     <div>
-                        <input ref={this.myRef1} className="inlineInput" type="text" placeholder = "Click button to show text"/>
-                        <input className="inlineInput" type="button" value="Button" onClick={this.showData}/>
-                        <input className="inlineInput" type="text" onBlur={this.showData2} placeholder="onblur to show text" />
+                        <label text="Account"></label>
+                        <input className="inlineInput" type="text" placeholder = "Account"/>
+                        <label text="Password"></label>
+                        <input className="inlineInput" type="text" onBlur={this.showData2} placeholder="Password" />
+                        <input className="inlineInput" type="button" value="Button"/>
                     </div>
                 )
             }
