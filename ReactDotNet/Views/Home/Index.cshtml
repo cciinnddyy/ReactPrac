@@ -8,6 +8,21 @@
 
 @section scripts{
     <script type="text/babel">
+        class LifeCycle_Parent extends React.Component{
+            
+            state = {
+                childval:"value"
+            }    
+            
+            render(){
+                return(
+                    <div>
+                        <h1>LifeCycle_Parent</h1>
+                        <LifeCycle child={this.state.childval} />
+                    <div>
+                )
+            }
+        }
         //Life Cycle of React Component
          //mount
          //unmount
@@ -45,7 +60,19 @@
                 //清除定時器
                 clearInterval(this.timer)
             }
-            //setState 的時候也會call render
+
+            //setState() 往下走 或 父組件render時
+            shouldComponentUpdate(){
+                console.log("shouldComponentUpdate")
+            }
+            componentWillUpdate(){
+                console.log("componentWillUpdate")
+            }
+
+            componentDidUpdate(){
+                console.log("componentDidUpdate")
+            }
+
             render (){
                   console.log("render")
                   return (
@@ -58,7 +85,6 @@
 
           }
           ReactDOM.render(<LifeCycle/>,document.getElementById('Demo'))
-
 
     </script>
 }
