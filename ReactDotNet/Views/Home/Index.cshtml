@@ -9,11 +9,11 @@
 @section scripts{
     <script type="text/babel">
         class LifeCycle_Parent extends React.Component{
-            
+
             state = {
                 childval:"value"
-            }    
-            
+            }
+
             render(){
                 return(
                     <div>
@@ -31,11 +31,17 @@
                 super(props)
                 console.log("constructor")
             }
-            //unmount
-            state = {
-                opacity:0.5
-            }
 
+            state = {
+                sum:0,
+            }
+            static getDerivedStateFromProps(){
+                console.log("getDerivedStateFromProps")
+            }
+            add = ()=>{
+                const {sum} = this.state
+                this.setState({sum:sum+1})
+            }
             death = ()=>{
                  console.log("death")
                  ReactDOM.unmountComponentAtNode(document.getElementById("Demo"))
@@ -46,14 +52,6 @@
             //組件完成掛載完畢調用
             componentDidMount(){
                 console.log("componentDidMount")
-                     this.timer = setInterval(()=>{
-                            let {opacity} = this.state
-                            opacity -= 0.1
-                            if(opacity<=0){
-                                opacity = 1
-                            }
-                            this.setState({opacity})
-                        },200)
             }
             componentWillUnmount(){
                 console.log("WillUnmount")
@@ -77,14 +75,15 @@
                   console.log("render")
                   return (
                          <div>
-                             <h2 style={{opacity:this.state.opacity}}>React 學不會 怎麼辦</h2>
+                             <h2>{this.state.sum}</h2>
                              <button onClick={this.death}>Hell is waiting</button>
+                             <button onClick={this.add}>Add</button>
                          </div>
                   )
               }
 
           }
-          ReactDOM.render(<LifeCycle/>,document.getElementById('Demo'))
+          ReactDOM.render(<LifeCycle_Parent/>,document.getElementById('Demo'))
 
     </script>
 }
