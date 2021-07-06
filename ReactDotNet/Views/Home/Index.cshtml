@@ -8,82 +8,73 @@
 
 @section scripts{
     <script type="text/babel">
-        class LifeCycle_Parent extends React.Component{
 
-            state = {
-                childval:"value"
-            }
+        class LifeCycle extends React.Component{
+                    constructor(props){
+                        super(props)
+                        console.log("constructor")
+                    }
 
-            render(){
-                return(
-                    <div>
-                        <h1>LifeCycle_Parent</h1>
-                        <LifeCycle child={this.state.childval} />
-                    <div>
-                )
-            }
-        }
-        //Life Cycle of React Component
-         //mount
-         //unmount
-         class LifeCycle extends React.Component{
-            constructor(props){
-                super(props)
-                console.log("constructor")
-            }
+                  state={
+                      sum:0
+                  }
+                  
+                  static getDerivedStateFromProps(props,state){
+                      console.log("getDerivedStateFromProps")
+                      return null
+                  }
 
-            state = {
-                sum:0,
-            }
-            static getDerivedStateFromProps(){
-                console.log("getDerivedStateFromProps")
-            }
-            add = ()=>{
-                const {sum} = this.state
-                this.setState({sum:sum+1})
-            }
-            death = ()=>{
-                 console.log("death")
-                 ReactDOM.unmountComponentAtNode(document.getElementById("Demo"))
-                 console.log("death")
-            }
+                  add = ()=>{
+                      const {sum} = this.state
+                      this.setState({sum:sum+1})
+                  }
+                  death = ()=>{
+                       console.log("death")
+                       ReactDOM.unmountComponentAtNode(document.getElementById("Demo"))
+                       console.log("death")
+                  }
 
-            //只調一次 built-in 通過 LifeCycle instance call
-            //組件完成掛載完畢調用
-            componentDidMount(){
-                console.log("componentDidMount")
-            }
-            componentWillUnmount(){
-                console.log("WillUnmount")
-                //清除定時器
-                clearInterval(this.timer)
-            }
 
-            //setState() 往下走 或 父組件render時
-            shouldComponentUpdate(){
-                console.log("shouldComponentUpdate")
-            }
-            componentWillUpdate(){
-                console.log("componentWillUpdate")
-            }
+                  componentDidMount(){
+                      console.log("componentDidMount")
+                  }
+                  componentWillUnmount(){
+                      console.log("WillUnmount")
+                      //清除定時器
+                      clearInterval(this.timer)
+                  }
 
-            componentDidUpdate(){
-                console.log("componentDidUpdate")
-            }
+                  //setState() 往下走 或 父組件render時
+                  shouldComponentUpdate(){
+                      console.log("shouldComponentUpdate")
+                       return true
+                  }
+                  componentWillUpdate(){
+                      console.log("componentWillUpdate")
+                  }
 
-            render (){
-                  console.log("render")
-                  return (
-                         <div>
-                             <h2>{this.state.sum}</h2>
-                             <button onClick={this.death}>Hell is waiting</button>
-                             <button onClick={this.add}>Add</button>
-                         </div>
-                  )
-              }
+                  getSnapshotBeforeUpdate(){
+                      console.log("getSnapShot")
+                      return "snapShotValue"
+                  }
 
-          }
-          ReactDOM.render(<LifeCycle_Parent/>,document.getElementById('Demo'))
+                  componentDidUpdate(prePorps,preState,snapShot){
+                      console.log("componentDidUpdate ",prePorps,preState,snapShot)
+                  }
+
+                  render(){
+                        console.log("render")
+                        return (
+                               <div>
+                                   <h2>{this.state.sum}</h2>
+                                   <button onClick={this.death}>Hell is waiting</button>
+                                   <button onClick={this.add}>Add</button>
+                               </div>
+                        )
+                    }
+
+                }
+                ReactDOM.render(<LifeCycle sum={300} />,document.getElementById('Demo'))
 
     </script>
 }
