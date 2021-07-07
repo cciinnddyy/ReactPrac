@@ -23,7 +23,7 @@ namespace ReactDotNet.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Your contact page.branch2";
 
             return View();
         }
